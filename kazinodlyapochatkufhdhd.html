@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="uk"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Слот Машина</title> 
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .game-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        .slots {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .slot {
+            background-color: #e0e0e0;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="game-container"> 
+   <h1>Слот Машина</h1> 
+   <div class="slots" id="slotsContainer"> <!-- Слоти будуть створені динамічно --> 
+   </div> 
+   <div class="message" id="message">
+    Готовий грати?
+   </div> 
+   <div>
+    Баланс: <span id="balance">0</span>
+   </div> 
+   <div>
+    Початковий баланс: 
+    <input type="number" id="initialBalance" value="100">
+   </div> 
+   <div>
+    Ставка: 
+    <input type="number" id="bet" value="10">
+   </div> 
+   <div>
+    Кількість слотів: 
+    <input type="number" id="slotsCount" value="3" min="1" max="6"> 
+   </div> <button onclick="initializeGame()">Почати гру</button> <button onclick="startGame()">Грати</button> <button onclick="changeBet()">Змінити ставку</button> <button onclick="changeSlots()">Змінити кількість слотів</button> 
+  </div> 
+  <script>
+        let balance = 0;
+        let bet = 0;
+        let slotsCount = 3;
+
+        function initializeGame() {
+            balance = parseInt(document.getElementById('initialBalance').value);
+            document.getElementById('balance').textContent = balance;
+            document.getElementById('message').textContent = "Готовий грати?";
+            updateSlots();
+        }
+
+        function getRandomSlot() {
+            return Math.floor(Math.random() * 9) + 1;  // Числа від 1 до 9
+        }
+
+        function getWinningMultiplier(slotsCount) {
+            switch(slotsCount) {
+                case 1: return 0.8;
+                case 2: return 1.3;
+                case 3: return 2;
+                case 4: return 2.5;
+                case 5: return 5;
+                case 6: return 10; // Додано для 6 слотів
+                default: return 1;
+            }
+        }
+
+        function startGame() {
+            bet = parseInt(document.getElementById('bet').value);
+            slotsCount = parseInt(document.getElementById('slotsCount').value);
+
+            if (bet > balance) {
+                alert("Недостатньо коштів для цієї ставки.");
+                return;
+            }
+
+            let results = [];
+            const slots = document.querySelectorAll('.slot');
+
+            slots.forEach((slot) => {
+                const randomNumber = getRandomSlot();
+                results.push(randomNumber);
+                slot.textContent = randomNumber;
+            });
+
+            // Перевірка на джекпот
+            let jackpot = results.every(num => num === 7);
+            if (jackpot) {
+                let multiplier = getWinningMultiplier(slotsCount);
+                let winnings = bet * multiplier;
+                balance += winnings;
+                document.getElementById('message').textContent = `ДЖЕКПОТ! Ви виграли ${winnings}`;
+            } else {
+                balance -= bet;
+                document.getElementById('message').textContent = `Ви програли ${bet}`;
+            }
+
+            document.getElementById('balance').textContent = balance;
+        }
+
+        function changeBet() {
+            bet = prompt("Введіть нову ставку:", bet);
+            document.getElementById('bet').value = bet;
+        }
+
+        function changeSlots() {
+            slotsCount = prompt("Введіть нову кількість слотів (від 1 до 6):", slotsCount);
+            if (slotsCount < 1) slotsCount = 1; // Не дозволяйте менше 1
+            if (slotsCount > 6) slotsCount = 6; // Не дозволяйте більше 6
+            document.getElementById('slotsCount').value = slotsCount;
+            updateSlots();
+        }
+
+        function updateSlots() {
+            const slotsContainer = document.getElementById('slotsContainer');
+            slotsContainer.innerHTML = ''; // Очищення контейнера
+
+            for (let i = 0; i < slotsCount; i++) {
+                const slotDiv = document.createElement('div');
+                slotDiv.classList.add('slot');
+                slotDiv.textContent = '0'; // Початкове значення
+                slotsContainer.appendChild(slotDiv);
+            }
+        }
+    </script> 
+ 
+</body></html>
