@@ -54,6 +54,10 @@
         button:hover {
             background-color: #0056b3;
         }
+        button:focus-visible, input:focus-visible {
+            outline: 2px solid #0056b3;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
@@ -62,11 +66,12 @@
         <div class="slots" id="slotsContainer">
             <!-- Слоти будуть створені динамічно -->
         </div>
-        <div class="message" id="message">Готовий грати?</div>
+        <div class="message" id="message" aria-live="polite">Готовий грати?</div>
         <div>Баланс: <span id="balance">0</span></div>
-        <div>Початковий баланс: <input type="number" id="initialBalance" value="100"></div>
-        <div>Ставка: <input type="number" id="bet" value="10"></div>
-        <div>Кількість слотів: 
+        <div><label for="initialBalance">Початковий баланс:</label> <input type="number" id="initialBalance" value="100"></div>
+        <div><label for="bet">Ставка:</label> <input type="number" id="bet" value="10"></div>
+        <div>
+            <label for="slotsCount">Кількість слотів:</label>
             <input type="number" id="slotsCount" value="3" min="1" max="6">
         </div>
         <button onclick="initializeGame()">Почати гру</button>
