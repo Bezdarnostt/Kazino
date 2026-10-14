@@ -1,0 +1,3 @@
+## 2026-10-14 - Live regions and explicit labels for HTML games
+**Learning:** In simple standalone HTML games, dynamic status messages and inputs lack accessibility by default. Adding `role="status"` and `aria-live="polite"` to message elements enables screen readers to announce win/loss updates automatically without interrupting speech. Furthermore, explicit `<label for="...">` elements ensure input fields are identifiable to assistive technology.
+**Action:** Always associate form inputs with `<label>` tags using matching `for` / `id` attributes, and assign `role="status" aria-live="polite"` to game status containers.
