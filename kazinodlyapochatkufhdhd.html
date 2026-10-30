@@ -1,10 +1,10 @@
-<!doctype html>
-<html lang="uk"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Слот Машина</title> 
-  <style>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слот Машина</title>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -54,33 +54,32 @@
         button:hover {
             background-color: #0056b3;
         }
-    </style> 
- </head> 
- <body> 
-  <div class="game-container"> 
-   <h1>Слот Машина</h1> 
-   <div class="slots" id="slotsContainer"> <!-- Слоти будуть створені динамічно --> 
-   </div> 
-   <div class="message" id="message">
-    Готовий грати?
-   </div> 
-   <div>
-    Баланс: <span id="balance">0</span>
-   </div> 
-   <div>
-    Початковий баланс: 
-    <input type="number" id="initialBalance" value="100">
-   </div> 
-   <div>
-    Ставка: 
-    <input type="number" id="bet" value="10">
-   </div> 
-   <div>
-    Кількість слотів: 
-    <input type="number" id="slotsCount" value="3" min="1" max="6"> 
-   </div> <button onclick="initializeGame()">Почати гру</button> <button onclick="startGame()">Грати</button> <button onclick="changeBet()">Змінити ставку</button> <button onclick="changeSlots()">Змінити кількість слотів</button> 
-  </div> 
-  <script>
+        button:focus-visible, input:focus-visible {
+            outline: 2px solid #0056b3;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Слот Машина</h1>
+        <div class="slots" id="slotsContainer">
+            <!-- Слоти будуть створені динамічно -->
+        </div>
+        <div class="message" id="message" role="status" aria-live="polite">Готовий грати?</div>
+        <div>Баланс: <span id="balance">0</span></div>
+        <div><label for="initialBalance">Початковий баланс:</label> <input type="number" id="initialBalance" value="100"></div>
+        <div><label for="bet">Ставка:</label> <input type="number" id="bet" value="10"></div>
+        <div><label for="slotsCount">Кількість слотів:</label>
+            <input type="number" id="slotsCount" value="3" min="1" max="6">
+        </div>
+        <button onclick="initializeGame()">Почати гру</button>
+        <button onclick="startGame()">Грати</button>
+        <button onclick="changeBet()">Змінити ставку</button>
+        <button onclick="changeSlots()">Змінити кількість слотів</button>
+    </div>
+
+    <script>
         let balance = 0;
         let bet = 0;
         let slotsCount = 3;
@@ -165,6 +164,6 @@
                 slotsContainer.appendChild(slotDiv);
             }
         }
-    </script> 
- 
-</body></html>
+    </script>
+</body>
+</html>
