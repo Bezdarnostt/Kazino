@@ -1,0 +1,3 @@
+## 2025-05-18 - Dual-File Slot Machine Accessibility Synchronization
+**Learning:** This repository contains two identical/mirrored standalone single-page slot machine implementations (`Kazilnomerodyn` and `kazinodlyapochatkufhdhd.html`) that lack npm build tooling. Unlabeled numeric inputs and dynamically updated status messages create severe barriers for assistive technology users and keyboard navigators.
+**Action:** Any UI/UX changes must be maintained identically across both files, associating `<label for>` attributes with form inputs and providing `role="status"` with `aria-live="polite"` for game outcome announcements alongside `:focus-visible` styling for interactive controls.
