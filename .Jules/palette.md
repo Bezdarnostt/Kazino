@@ -1,0 +1,3 @@
+## 2026-11-06 - Dual-File Slot Machine Accessibility Synchronization
+**Learning:** This repository contains two mirrored standalone single-page slot machine implementations (`Kazilnomerodyn` and `kazinodlyapochatkufhdhd.html`) that lack npm build tooling. Unlabeled numeric inputs, lack of live regions for spin announcements, missing keyboard focus rings, and an unpopulated initial board state create friction for keyboard and assistive tech users.
+**Action:** Any UI/UX changes must be maintained identically across both files, associating `<label for>` attributes with form inputs, providing `role="status"` with `aria-live="polite"` for game outcome announcements alongside `:focus-visible` styling for interactive controls and auto-initializing default slots on page load.
