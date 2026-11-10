@@ -1,0 +1,3 @@
+## 2026-11-10 - Auto-initialize slot game and semantic form labeling
+**Learning:** In standalone lightweight HTML slot game pages without an app framework, dynamic containers start empty unless initialized on load, confusing users who see a blank area and $0 balance despite a default value of 100 in the inputs. Calling the initializer on load and providing explicit `<label for="...">` alongside `aria-live="polite"` dynamic regions gives an intuitive, screen-reader-friendly landing state.
+**Action:** Always verify empty initial DOM states on landing in HTML game interfaces and ensure live regions announce balance/game message updates to assistive technology.
